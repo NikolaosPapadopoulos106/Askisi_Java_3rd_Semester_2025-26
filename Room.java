@@ -1,4 +1,6 @@
 public class Room {
+    private static int nextRoomId = 1;
+
     private String id;
     private double nightlyRate;
 
@@ -13,5 +15,10 @@ public class Room {
 
     public double getNightlyRate(){
         return nightlyRate;
+    }
+
+    @Override
+    public String toString(){
+        return "Room " + id + " ($" + nightlyRate + "/night)";
     }
 }
