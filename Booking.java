@@ -8,16 +8,19 @@ public class Booking {
     private Room room;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String customerName;
+    private boolean massage;
 
-    public Booking(Room room, LocalDate startDate, LocalDate endDate){
-        this,id = nextid++;
+    public Booking(Room room, String customerName, LocalDate startDate, LocalDate endDate){
+        this.id = nextId++;
         this.customerName = customerName;
         this.room = room;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.massage = massage;
     }
 
-    public getId(){
+    public int getId(){
         return id;
     }
 
@@ -37,11 +40,21 @@ public class Booking {
         return endDate;
     }
 
+    public boolean hasMassage(){
+        return massage;
+    }
+
     public long getNights(){
         return ChronoUnit.DAYS.between(startDate, endDate);
     }
 
     public double getTotalCost(){
-        return getNights() * room.getNightlyRate();
+        double baseCost = getNights() * room.getNightlyRate();
+
+        if (massage && room.getType() == Room.RoomType.SUITE){
+            baseCost *= 1.10;
+        }
+        return baseCost;
     }
+
 }

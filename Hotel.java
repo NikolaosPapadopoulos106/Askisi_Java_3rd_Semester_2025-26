@@ -7,9 +7,9 @@ public class Hotel {
     private List<Room> rooms = new ArrayList<>();
     private List<Booking> bookings = new ArrayList<>();
 
-    public Room addRoom(double nightlyRate){
-        Room room = new Room(nightlyRate);
-        rooms.addd(room);
+    public Room addRoom(Room.RoomType type){
+        Room room = new Room(type);
+        rooms.add(room);
         return room;
     }
 
@@ -22,7 +22,7 @@ public class Hotel {
         return null;
     }
 
-    private boolean isROomAvailable(Room room, LocalDate start, LocalDate end){
+    private boolean isRoomAvailable(Room room, LocalDate start, LocalDate end){
         for (Booking b :bookings){
             if(b.getRoom().getId() == room.getId()){
 
@@ -41,17 +41,17 @@ public class Hotel {
         Room room = getRoomById(roomId);
         if (room == null)
             return null;
-        if (!isROomAvailable(room, start, end))
+        if (!isRoomAvailable(room, start, end))
             return null;
 
-        Booking b = new Booking(room, customerName, start, end);
-        bookings.add(b);
-        return b;
+        Booking booking = new Booking(room, customerName, start, end);
+        bookings.add(booking);
+        return booking;
     }
 
-    public Booking getBookingById(int id){
+    public Booking getBookingById(int bookingid){
         for (Booking b : bookings){
-            if (b.getId() == id){
+            if (b.getId() == bookingid){
                 return b;
             }
         }
@@ -61,7 +61,7 @@ public class Hotel {
     public List<Booking> searchBookingByCustomer(String name){
         List<Booking> result = new ArrayList<>();
 
-        for (Booking.b : bookings){
+        for (Booking b : bookings){
             if(b.getCustomerName().equalsIgnoreCase(name)){
                 result.add(b);
             }
@@ -73,10 +73,10 @@ public class Hotel {
         List<Booking> result = new ArrayList<>();
 
         for (Booking b :bookings){
-            boolean overlad =
+            boolean overlap =
                     start.isBefore(b.getEndDate()) &&
                     end.isAfter(b.getStartDate());
-            if(overlad){
+            if(overlap){
                 result.add(b);
             }
         }
