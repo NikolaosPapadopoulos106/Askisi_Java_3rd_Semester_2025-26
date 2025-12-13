@@ -50,6 +50,22 @@ public class Vehicles {
         available = true;
     }
 
-    //PRICE MANAGMENT
+    public static void setPrices(double newSkouter, double newGourouna, double newAuto){
+        skouter = newSkouter;
+        gourouna = newGourouna;
+        auto = newAuto;
+    }
+
+    public String getLicensePlate(){
+        return licensePlate;
+    }
+
+    public VehicleType getType(){
+        return type;
+    }
+
+    public double getDailyPrice(){
+        return dailyPrice;
+    }
 
 }
