@@ -22,7 +22,7 @@ public class Hotel {
         return null;
     }
 
-    private boolean isRoomAvailable(Room room, LocalDate start, LocalDate end){
+    public boolean isRoomAvailable(Room room, LocalDate start, LocalDate end){
         for (Booking b :bookings){
             if(b.getRoom().getId() == room.getId()){
 
@@ -37,14 +37,14 @@ public class Hotel {
         }
         return true;
     }
-    public Booking createBooking(int roomId, String customerName, LocalDate start, LocalDate end){
+    public Booking createBooking(int roomId, String customerName, LocalDate start, LocalDate end, boolean massage){
         Room room = getRoomById(roomId);
         if (room == null)
             return null;
         if (!isRoomAvailable(room, start, end))
             return null;
 
-        Booking booking = new Booking(room, customerName, start, end);
+        Booking booking = new Booking(room, customerName, start, end, massage);
         bookings.add(booking);
         return booking;
     }

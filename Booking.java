@@ -11,7 +11,7 @@ public class Booking {
     private String customerName;
     private boolean massage;
 
-    public Booking(Room room, String customerName, LocalDate startDate, LocalDate endDate){
+    public Booking(Room room, String customerName, LocalDate startDate, LocalDate endDate, boolean massage){
         this.id = nextId++;
         this.customerName = customerName;
         this.room = room;

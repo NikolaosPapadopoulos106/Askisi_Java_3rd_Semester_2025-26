@@ -8,7 +8,7 @@ public class BookingManager {
 
     public boolean isAvailable(Room room, LocalDate start, LocalDate end){
         for (Booking b : bookings){
-            if (b.getRoom().getId().equals(room.getId())){
+            if (b.getRoom().getId() == (room.getId())){
                 boolean overlap =
                         start.isBefore(b.getEndDate()) &&
                         end.isAfter(b.getStartDate());
@@ -21,12 +21,16 @@ public class BookingManager {
         return true; // room is available
     }
 
-    public Booking createBooking(Room room, LocalDate start, LocalDate end){
+    public Booking createBooking(Room room,
+                                 String customerName,
+                                 LocalDate start,
+                                 LocalDate end,
+                                 boolean massage){
         if(!isAvailable(room,start,end)){
             return null;
         }
         
-        Booking booking = new Booking(room, start, end);
+        Booking booking = new Booking(room, customerName, start, end, massage);
         bookings.add(booking);
         return booking;
     }
